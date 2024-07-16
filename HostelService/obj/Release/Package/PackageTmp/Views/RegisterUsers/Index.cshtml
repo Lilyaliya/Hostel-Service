@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Авторизация";
+}
+
+
+@if (Request.IsAuthenticated)
+{
+
+    <span>Добро пожаловать, @Html.Encode(User.Identity.Name) !</span>
+}
+else
+{
+
+    @Html.ActionLink("Вход", "Login", "RegisterUsers")
+    <br />
+
+    @Html.ActionLink("Регистрация", "Register", "RegisterUsers")
+}

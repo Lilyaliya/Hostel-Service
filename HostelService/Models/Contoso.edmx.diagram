@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d858ab79eefe4233a9a30abc456447df" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="HostelRegDB_datModel.Booking" Width="1.5" PointX="5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HostelRegDB_datModel.Client" Width="1.5" PointX="1" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HostelRegDB_datModel.Payment" Width="1.5" PointX="5" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HostelRegDB_datModel.Room" Width="1.5" PointX="8.5" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="HostelRegDB_datModel.FK__Booking__Client___1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="HostelRegDB_datModel.FK__Booking__Room_ID__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="HostelRegDB_datModel.FK__Payment__Client___25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="HostelRegDB_datModel.FK__Payment__Room_ID__286302EC" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="HostelRegDB_datModel.Booking_Payment" ManuallyRouted="false" ></AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,92 @@
+﻿@model PagedList.IPagedList<HostelService.Models.Client>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Посетители";
+    //Layout = null;
+    //var grid = new WebGrid(canPage: true, rowsPerPage: 10);
+    //grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Журнал посетителей</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2>Список посетителей</h2>
+                <div class="collapse navbar-collapse">
+                    @using (Html.BeginForm("Index", "Clients", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                    {
+                        <div class="form-group">
+                            <input type="text" name="currFilter" value="@ViewBag.currFilter" class="form-control" />
+                        </div>
+                        <button type="submit" value="Поиск" class="btn btn-success">Поиск</button>
+                    }
+                </div>
+        <div>
+            <p>@Html.ActionLink("Новая запись", "Create")</p>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.ActionLink("Фамилия", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "Surname" })
+                        <!--Html.DisplayNameFor(model => model.Surname)-->
+                    </th>
+                    <th>
+                        @Html.ActionLink("Имя", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "FName" })
+                        <!--DisplayNameFor(model => model.FName)-->
+                    </th>
+                    <th>
+                        @Html.ActionLink("Отчество", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "Second_name"})
+                    </th>
+                    <th>
+                        @Html.ActionLink("Паспорт", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "Passport" })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Контактный номер", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "Phone" })
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Surname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Second_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Passport)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Редактировать", "Edit", new { id = item.Client_ID }) |
+                            @Html.ActionLink("Подробности", "Details", new { id = item.Client_ID }) |
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Client_ID })
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+            Стр @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortdir = ViewBag.CurrentSort, currFilter = ViewBag.currFilter, sort = ViewBag.CurrCol}))
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿@model HostelService.Models.Booking
+
+@{
+    ViewBag.Title = "Удаление";
+}
+
+
+<h3>Вы уверены, что хотите удалить запись?</h3>
+<div>
+    <h4>Текущая запись</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Дата бронирования")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Receipt_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Дата заселения")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Arrival_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Дата выселения")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Посетитель")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Surname)
+            @Html.DisplayFor(model => model.Client.FName)
+            @Html.DisplayFor(model => model.Client.Second_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Комната")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room.Room_num)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

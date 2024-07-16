@@ -1,0 +1,57 @@
+﻿@model HostelService.Models.Booking
+
+@{
+    ViewBag.Title = "Подробности";
+}
+
+
+<div>
+    <h4>Текущая запись</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Дата бронирования")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Receipt_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Дата заселения")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Arrival_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Дата выселения")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departure_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Посетитель")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Комната")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room.Room_num)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Receipt_ID }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

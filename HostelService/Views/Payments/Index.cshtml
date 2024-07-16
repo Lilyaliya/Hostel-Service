@@ -1,0 +1,42 @@
+﻿@model IEnumerable<HostelService.Models.Payment>
+
+@{
+    ViewBag.Title = "Квитанции";
+}
+<h2>Квитанции</h2>
+
+<p>
+    @Html.ActionLink("Новая запись", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Посетитель")
+        </th>
+        <th>
+            @Html.DisplayName("Комната")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Surname)
+                @Html.DisplayFor(modelItem => item.Client.FName)
+                @Html.DisplayFor(modelItem => item.Client.Second_name)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.Room_num)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.Receipt_num }) |
+                @Html.ActionLink("Подробности", "Details", new { id = item.Receipt_num }) |
+                @Html.ActionLink("Удаление", "Delete", new { id = item.Receipt_num })
+            </td>
+        </tr>
+    }
+
+</table>

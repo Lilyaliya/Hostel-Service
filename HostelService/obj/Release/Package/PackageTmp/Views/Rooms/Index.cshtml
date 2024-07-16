@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<HostelService.Models.Room>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Номера";
+}
+
+<h2>Номера</h2>
+
+    <div>
+        @using (Html.BeginForm("Index", "Rooms", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+        {
+            /*<div>
+                <input type="hidden" name="key_Temp" value="@ViewBag.KeyTemp*(-1))" />
+            </div>*/
+            /*<button type="submit" value="Свободные номера" class="btn btn-success">Свободные номера</button>*/
+            <p>
+                Свободные номера: @Html.CheckBox("key_Temp", ViewBag.KeyTemp as string)
+                <input type="submit" value="Показать" />
+            </p>
+         }
+    </div>
+    <div class="collapse navbar-collapse">
+        @using (Html.BeginForm("Index", "Rooms", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+        {
+            <div class="form-group">
+                <input type="text" name="currFilter" value="@ViewBag.currFilter" class="form-control" placeholder="search" />
+            </div>
+            <button type="submit" value="Поиск" class="btn btn-success">Поиск</button>
+        }
+    </div>
+    <p>
+        @Html.ActionLink("Новая запись", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Комната", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, key_Temp = ViewBag.KeyTemp, sort = "Room_num" })
+            </th>
+            <th>
+                @Html.ActionLink("Этаж", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, key_Temp = ViewBag.KeyTemp, sort = "Floor_n" })
+            </th>
+            <th>
+                @Html.ActionLink("Места", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, key_Temp = ViewBag.KeyTemp, sort = "Places" })
+            </th>
+            <th>
+                @Html.ActionLink("Стоимость/сут", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, key_Temp = ViewBag.KeyTemp, sort = "Cost_p_day" })
+            </th>
+            <th>
+                @Html.ActionLink("Категория", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, key_Temp = ViewBag.KeyTemp, sort = "Category" })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room_num)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Floor_n)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Places)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost_p_day)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.ActionLink("Редактировать", "Edit", new { id = item.Room_ID }) |
+                    @Html.ActionLink("Подробности", "Details", new { id = item.Room_ID }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Room_ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+    Стр @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortdir = ViewBag.CurrentSort, currFilter = ViewBag.currFilter, sort = ViewBag.CurrCol, key_Temp = ViewBag.KeyTemp }))

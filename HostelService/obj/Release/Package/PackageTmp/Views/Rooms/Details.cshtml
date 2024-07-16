@@ -1,0 +1,57 @@
+﻿@model HostelService.Models.Room
+
+@{
+    ViewBag.Title = "Подробности";
+}
+
+
+<div>
+    <h4>Комната</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Номер")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Этаж")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Floor_n)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Количество мест")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Places)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Стоимость/сут")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost_p_day)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Категория")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Room_ID }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

@@ -1,0 +1,85 @@
+﻿@model PagedList.IPagedList<HostelService.Models.Booking>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.13.2.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.datepicker').datepicker({});
+    });
+</script>
+<h2>Журнал бронирований</h2>
+<div class="collapse navbar-collapse">
+    @{
+        ViewBag.Title = "Бронирование";
+    }
+
+    @using (Html.BeginForm("Index", "Bookings", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+    {
+        <div class="form-group">
+            <input type="text" name="currFilter" value="@ViewBag.currFilter" class="form-control" placeholder="поиск" />
+            <!--<p>По дате:</p>-->
+            По дате: <input type="date" name="requestedDate" value="@ViewBag.RequestedDate" class="form-control" />
+        </div>
+        <button type="submit" value="Поиск" class="btn btn-success">Поиск</button>
+    }
+</div>
+
+<div>
+    <p>
+        @Html.ActionLink("Новая запись", "Create")
+    </p>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Дата бронирования", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "Receipt_date", requestedDate = ViewBag.RequestedDate })
+        </th>
+        <th>
+            @Html.ActionLink("Дата заселения", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "Arrival_date", requestedDate = ViewBag.RequestedDate })
+        </th>
+        <th>
+            @Html.ActionLink("Дата выселения", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "Departure_date", requestedDate = ViewBag.RequestedDate })
+        </th>
+        <th>
+            @Html.ActionLink("Посетитель", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "Client_ID", requestedDate = ViewBag.RequestedDate })
+        </th>
+        <th>
+            @Html.ActionLink("Комната", "Index", new { sortdir = ViewBag.NameSortParm, currFilter = ViewBag.currFilter, sort = "Room_ID", requestedDate = ViewBag.RequestedDate })
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Receipt_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Arrival_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departure_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.Room_num)
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.Receipt_ID }) |
+                @Html.ActionLink("Подробности", "Details", new { id = item.Receipt_ID }) |
+                @Html.ActionLink("Удалить запись", "Delete", new { id = item.Receipt_ID })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+    Стр @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortdir = ViewBag.CurrentSort, currFilter = ViewBag.currFilter, sort = ViewBag.CurrCol, requestedDate = ViewBag.RequestedDate }))

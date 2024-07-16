@@ -1,0 +1,41 @@
+﻿@model HostelService.Models.Payment
+
+@{
+    ViewBag.Title = "Подробности";
+}
+
+
+<div>
+    <h4>Квитанция</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Посетитель")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Client.Surname)
+            @Html.DisplayFor(model => model.Client.FName)
+            @Html.DisplayFor(model => model.Client.Second_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Комната")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Room.Room_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("К оплате")
+        </dt>
+        <dd>
+            @ViewBag.TotalCost
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Receipt_num }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

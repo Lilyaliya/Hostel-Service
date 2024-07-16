@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище HostelRegDB_datModelContainer" CdmEntityContainer="HostelRegDB_datEntities">
+    <EntitySetMapping Name="Booking">
+      <EntityTypeMapping TypeName="HostelRegDB_datModel.Booking">
+        <MappingFragment StoreEntitySet="Booking">
+          <ScalarProperty Name="Receipt_ID" ColumnName="Receipt_ID" />
+          <ScalarProperty Name="Receipt_date" ColumnName="Receipt_date" />
+          <ScalarProperty Name="Arrival_date" ColumnName="Arrival_date" />
+          <ScalarProperty Name="Departure_date" ColumnName="Departure_date" />
+          <ScalarProperty Name="Client_ID" ColumnName="Client_ID" />
+          <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="HostelRegDB_datModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="Client_ID" ColumnName="Client_ID" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="FName" ColumnName="FName" />
+          <ScalarProperty Name="Second_name" ColumnName="Second_name" />
+          <ScalarProperty Name="Passport" ColumnName="Passport" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payment">
+      <EntityTypeMapping TypeName="HostelRegDB_datModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="Receipt_num" ColumnName="Receipt_num" />
+          <ScalarProperty Name="Client_ID" ColumnName="Client_ID" />
+          <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Room">
+      <EntityTypeMapping TypeName="HostelRegDB_datModel.Room">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="Room_ID" ColumnName="Room_ID" />
+          <ScalarProperty Name="Room_num" ColumnName="Room_num" />
+          <ScalarProperty Name="Floor_n" ColumnName="Floor_n" />
+          <ScalarProperty Name="Places" ColumnName="Places" />
+          <ScalarProperty Name="Cost_p_day" ColumnName="Cost_p_day" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Booking_Payment" TypeName="HostelRegDB_datModel.Booking_Payment" StoreEntitySet="Booking_Payment">
+      <EndProperty Name="Booking">
+        <ScalarProperty Name="Receipt_ID" ColumnName="Receipt_ID" />
+      </EndProperty>
+      <EndProperty Name="Payment">
+        <ScalarProperty Name="Receipt_num" ColumnName="Receipt_num" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
